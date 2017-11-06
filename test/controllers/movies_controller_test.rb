@@ -56,4 +56,41 @@ describe MoviesController do
     end
   end
 
+  #TODO: ensure all the expected data is being returned from this resource; name matches the name in fixture, age is the same, human is the same
+
+  describe "create" do
+    let(:movie_data) {
+      {
+        title: "movie title",
+        release_data: 1999-10-10,
+        inventory: 10
+      }
+    }
+
+    it "should create a movie" do
+      proc {
+        post movies_path, params: {movie: movie_data}}.must_change 'Movie.count', 1
+
+      must_respond_with :success
+    end
+
+    it "should not change the database if the title is missing" do
+      invalid_movie_data = {
+        release_data: 1999-10-10,
+        inventory: 10
+      }
+
+      proc {
+        post movies_path, params: {movie: invalid_movie_data}}.wont_change 'Movie.count'
+
+      must_respond_with :bad_request
+
+      body = JSON.parse(response.body)
+      body.must_equal "errors" => {"title" => ["can't be blank"]}
+    end
+
+
+
+
+  end
 end
