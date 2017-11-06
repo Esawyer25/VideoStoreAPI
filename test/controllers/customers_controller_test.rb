@@ -38,6 +38,12 @@ describe CustomersController do
       end
     end
 
-    
+      ##TODO: returns an empty array if no customers
   end
+
+
+
+
+
+
 end
