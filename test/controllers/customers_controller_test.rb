@@ -9,6 +9,35 @@ describe CustomersController do
       must_respond_with :success
     end
 
+    it "should return json" do
+      get customers_path
+      response.header['Content-Type'].must_include 'json'
+    end
 
+    it "should return an Array" do
+      get customers_path
+
+      body = JSON.parse(response.body)
+      body.must_be_kind_of Array
+    end
+
+    it "should return all customers" do
+      get customers_path
+
+      body = JSON.parse(response.body)
+      body.length.must_equal Customer.count
+    end
+
+    it "should return customers with exactly the required data" do
+      keys = %w(id movies_checked_out_count name phone postal_code registered_at)
+
+      get customers_path
+      body = JSON.parse(response.body)
+      body.each do |cust|
+        cust.keys.sort.must_equal keys
+      end
+    end
+
+    
   end
 end
