@@ -1,7 +1,5 @@
 class RentalsController < ApplicationController
 
-
-
   def create
     rental = Rental.new(rental_params)
     if rental.save
