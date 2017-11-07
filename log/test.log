@@ -1726,3 +1726,471 @@ Movie::validations: test_0002_should not be valid without a title
 -----------------------------------------------------------------
   [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
   [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "customers" DISABLE TRIGGER ALL;ALTER TABLE "movies" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "customers"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2017-11-07 18:42:14.979930', '2017-11-07 18:42:14.979930', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2017-11-07 18:42:14.979930', '2017-11-07 18:42:14.979930', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "movies"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Psych', 'When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower', '1960-06-16', 8, 8, '2017-11-07 18:42:14.996266', '2017-11-07 18:42:14.996266', 287487352)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Jaws', 'SHARKS', '1975-06-19', 6, 6, '2017-11-07 18:42:14.996266', '2017-11-07 18:42:14.996266', 898238949)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "customers" ENABLE TRIGGER ALL;ALTER TABLE "movies" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------
+MoviesController::create: test_0002_should not change the database if the title is missing
+------------------------------------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies"[0m
+Started POST "/movies" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by MoviesController#create as HTML
+  Parameters: {"movie"=>{"release_data"=>"1979", "inventory"=>"10"}}
+Unpermitted parameter: :release_data
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.17ms)
+Completed 400 Bad Request in 16ms (Views: 3.9ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+MoviesController::create: test_0001_should create a movie
+---------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies"[0m
+Started POST "/movies" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by MoviesController#create as HTML
+  Parameters: {"movie"=>{"title"=>"movie title", "release_data"=>"1979", "inventory"=>"10"}}
+Unpermitted parameter: :release_data
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "movies" ("title", "inventory", "created_at", "updated_at", "available_inventory") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "movie title"], ["inventory", 10], ["created_at", "2017-11-07 18:42:15.042905"], ["updated_at", "2017-11-07 18:42:15.042905"], ["available_inventory", 10]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------------
+CustomersController::index: test_0001_is a real working route
+-------------------------------------------------------------
+Started GET "/customers" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+No serializer found for resource: #<Customer id: 980190962, name: "MyString", registered_at: "MyString", address: "MyString", city: "MyString", state: "MyString", postal_code: "MyString", phone: "MyString", created_at: "2017-11-07 18:42:14", updated_at: "2017-11-07 18:42:14", account_credit: nil, movies_checked_out_count: 0>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Customer::ActiveRecord_Relation (4.88ms)
+Completed 200 OK in 23ms (Views: 22.2ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------------------------------
+CustomersController::index: test_0005_should return customers with exactly the required data
+--------------------------------------------------------------------------------------------
+Started GET "/customers" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+No serializer found for resource: #<Customer id: 980190962, name: "MyString", registered_at: "MyString", address: "MyString", city: "MyString", state: "MyString", postal_code: "MyString", phone: "MyString", created_at: "2017-11-07 18:42:14", updated_at: "2017-11-07 18:42:14", account_credit: nil, movies_checked_out_count: 0>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Customer::ActiveRecord_Relation (0.59ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------------------------------------
+CustomersController::index: test_0006_returns an empty array if there are no customer
+-------------------------------------------------------------------------------------
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "customers" WHERE "customers"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "customers" WHERE "customers"."id" = $1[0m  [["id", 298486374]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/customers" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.24ms)
+Completed 200 OK in 6ms (Views: 5.5ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+CustomersController::index: test_0002_should return json
+--------------------------------------------------------
+Started GET "/customers" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+No serializer found for resource: #<Customer id: 980190962, name: "MyString", registered_at: "MyString", address: "MyString", city: "MyString", state: "MyString", postal_code: "MyString", phone: "MyString", created_at: "2017-11-07 18:42:14", updated_at: "2017-11-07 18:42:14", account_credit: nil, movies_checked_out_count: 0>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Customer::ActiveRecord_Relation (1.01ms)
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------
+CustomersController::index: test_0003_should return an Array
+------------------------------------------------------------
+Started GET "/customers" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+No serializer found for resource: #<Customer id: 980190962, name: "MyString", registered_at: "MyString", address: "MyString", city: "MyString", state: "MyString", postal_code: "MyString", phone: "MyString", created_at: "2017-11-07 18:42:14", updated_at: "2017-11-07 18:42:14", account_credit: nil, movies_checked_out_count: 0>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Customer::ActiveRecord_Relation (0.61ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------------
+CustomersController::index: test_0004_should return all customers
+-----------------------------------------------------------------
+Started GET "/customers" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+No serializer found for resource: #<Customer id: 980190962, name: "MyString", registered_at: "MyString", address: "MyString", city: "MyString", state: "MyString", postal_code: "MyString", phone: "MyString", created_at: "2017-11-07 18:42:14", updated_at: "2017-11-07 18:42:14", account_credit: nil, movies_checked_out_count: 0>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Customer::ActiveRecord_Relation (0.66ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "customers"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+Movie::validations: test_0001_should be valid
+---------------------------------------------
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------------
+Movie::validations: test_0002_should not be valid without a title
+-----------------------------------------------------------------
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+MoviesController::index: test_0002_should return json
+-----------------------------------------------------
+Started GET "/movies" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by MoviesController#index as HTML
+  [1m[36mMovie Load (0.6ms)[0m  [1m[34mSELECT "movies".* FROM "movies"[0m
+No serializer found for resource: #<Movie id: 287487352, title: "Psych", overview: "When larcenous real estate clerk Marion Crane goes...", release_date: "1960-06-16", inventory: 8, created_at: "2017-11-07 18:42:14", updated_at: "2017-11-07 18:42:14", available_inventory: 8>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Movie::ActiveRecord_Relation (1.0ms)
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------
+MoviesController::index: test_0004_should return all movies
+-----------------------------------------------------------
+Started GET "/movies" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by MoviesController#index as HTML
+  [1m[36mMovie Load (0.4ms)[0m  [1m[34mSELECT "movies".* FROM "movies"[0m
+No serializer found for resource: #<Movie id: 287487352, title: "Psych", overview: "When larcenous real estate clerk Marion Crane goes...", release_date: "1960-06-16", inventory: 8, created_at: "2017-11-07 18:42:14", updated_at: "2017-11-07 18:42:14", available_inventory: 8>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Movie::ActiveRecord_Relation (0.68ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------------------
+MoviesController::index: test_0006_returns an empty array if there are no movies
+--------------------------------------------------------------------------------
+  [1m[36mMovie Load (0.3ms)[0m  [1m[34mSELECT "movies".* FROM "movies"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "movies" WHERE "movies"."id" = $1[0m  [["id", 287487352]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "movies" WHERE "movies"."id" = $1[0m  [["id", 898238949]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/movies" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by MoviesController#index as HTML
+  [1m[36mMovie Load (0.5ms)[0m  [1m[34mSELECT "movies".* FROM "movies"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.08ms)
+Completed 200 OK in 1ms (Views: 0.8ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+MoviesController::index: test_0001_is a real working route
+----------------------------------------------------------
+Started GET "/movies" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by MoviesController#index as HTML
+  [1m[36mMovie Load (0.3ms)[0m  [1m[34mSELECT "movies".* FROM "movies"[0m
+No serializer found for resource: #<Movie id: 287487352, title: "Psych", overview: "When larcenous real estate clerk Marion Crane goes...", release_date: "1960-06-16", inventory: 8, created_at: "2017-11-07 18:42:14", updated_at: "2017-11-07 18:42:14", available_inventory: 8>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Movie::ActiveRecord_Relation (0.55ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+MoviesController::index: test_0003_should return an Array
+---------------------------------------------------------
+Started GET "/movies" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by MoviesController#index as HTML
+  [1m[36mMovie Load (0.4ms)[0m  [1m[34mSELECT "movies".* FROM "movies"[0m
+No serializer found for resource: #<Movie id: 287487352, title: "Psych", overview: "When larcenous real estate clerk Marion Crane goes...", release_date: "1960-06-16", inventory: 8, created_at: "2017-11-07 18:42:14", updated_at: "2017-11-07 18:42:14", available_inventory: 8>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Movie::ActiveRecord_Relation (0.56ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------------------------
+MoviesController::index: test_0005_should return movies with exactly the required data
+--------------------------------------------------------------------------------------
+Started GET "/movies" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by MoviesController#index as HTML
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT "movies".* FROM "movies"[0m
+No serializer found for resource: #<Movie id: 287487352, title: "Psych", overview: "When larcenous real estate clerk Marion Crane goes...", release_date: "1960-06-16", inventory: 8, created_at: "2017-11-07 18:42:14", updated_at: "2017-11-07 18:42:14", available_inventory: 8>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Movie::ActiveRecord_Relation (0.62ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------
+Customer: test_0001_must be valid
+---------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------
+MoviesController::show: test_0003_returns the right information
+---------------------------------------------------------------
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
+Started GET "/movies/898238949" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by MoviesController#show as HTML
+  Parameters: {"id"=>"898238949"}
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+MoviesController::show: test_0001_can get a specific movie
+----------------------------------------------------------
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
+Started GET "/movies/898238949" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by MoviesController#show as HTML
+  Parameters: {"id"=>"898238949"}
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------
+MoviesController::show: test_0002_responds correctly when movie is not found
+----------------------------------------------------------------------------
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" ORDER BY "movies"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/movies/898238950" for 127.0.0.1 at 2017-11-07 10:42:15 -0800
+Processing by MoviesController#show as HTML
+  Parameters: {"id"=>"898238950"}
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238950], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 404 Not Found in 1ms (Views: 0.5ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "customers" DISABLE TRIGGER ALL;ALTER TABLE "movies" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "customers"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2017-11-07 18:44:09.475933', '2017-11-07 18:44:09.475933', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2017-11-07 18:44:09.475933', '2017-11-07 18:44:09.475933', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "movies"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Psych', 'When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower', '1960-06-16', 8, 8, '2017-11-07 18:44:09.483901', '2017-11-07 18:44:09.483901', 287487352)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Jaws', 'SHARKS', '1975-06-19', 6, 6, '2017-11-07 18:44:09.483901', '2017-11-07 18:44:09.483901', 898238949)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "customers" ENABLE TRIGGER ALL;ALTER TABLE "movies" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------
+Customer: test_0001_must be valid
+---------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------
+MoviesController::index: test_0004_should return all movies
+-----------------------------------------------------------
+Started GET "/movies" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by MoviesController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+MoviesController::index: test_0003_should return an Array
+---------------------------------------------------------
+Started GET "/movies" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by MoviesController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+MoviesController::index: test_0001_is a real working route
+----------------------------------------------------------
+Started GET "/movies" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by MoviesController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+MoviesController::index: test_0002_should return json
+-----------------------------------------------------
+Started GET "/movies" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by MoviesController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------------------------
+MoviesController::index: test_0005_should return movies with exactly the required data
+--------------------------------------------------------------------------------------
+Started GET "/movies" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by MoviesController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------------------
+MoviesController::index: test_0006_returns an empty array if there are no movies
+--------------------------------------------------------------------------------
+  [1m[36mMovie Load (0.3ms)[0m  [1m[34mSELECT "movies".* FROM "movies"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[31mDELETE FROM "movies" WHERE "movies"."id" = $1[0m  [["id", 287487352]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "movies" WHERE "movies"."id" = $1[0m  [["id", 898238949]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/movies" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by MoviesController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------
+CustomersController::index: test_0003_should return an Array
+------------------------------------------------------------
+Started GET "/customers" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+No serializer found for resource: #<Customer id: 980190962, name: "MyString", registered_at: "MyString", address: "MyString", city: "MyString", state: "MyString", postal_code: "MyString", phone: "MyString", created_at: "2017-11-07 18:44:09", updated_at: "2017-11-07 18:44:09", account_credit: nil, movies_checked_out_count: 0>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Customer::ActiveRecord_Relation (0.74ms)
+Completed 200 OK in 13ms (Views: 12.0ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+CustomersController::index: test_0002_should return json
+--------------------------------------------------------
+Started GET "/customers" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+No serializer found for resource: #<Customer id: 980190962, name: "MyString", registered_at: "MyString", address: "MyString", city: "MyString", state: "MyString", postal_code: "MyString", phone: "MyString", created_at: "2017-11-07 18:44:09", updated_at: "2017-11-07 18:44:09", account_credit: nil, movies_checked_out_count: 0>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Customer::ActiveRecord_Relation (0.54ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------------------------------
+CustomersController::index: test_0005_should return customers with exactly the required data
+--------------------------------------------------------------------------------------------
+Started GET "/customers" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+No serializer found for resource: #<Customer id: 980190962, name: "MyString", registered_at: "MyString", address: "MyString", city: "MyString", state: "MyString", postal_code: "MyString", phone: "MyString", created_at: "2017-11-07 18:44:09", updated_at: "2017-11-07 18:44:09", account_credit: nil, movies_checked_out_count: 0>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Customer::ActiveRecord_Relation (0.53ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------------------------------------
+CustomersController::index: test_0006_returns an empty array if there are no customer
+-------------------------------------------------------------------------------------
+  [1m[36mCustomer Load (0.1ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "customers" WHERE "customers"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[31mDELETE FROM "customers" WHERE "customers"."id" = $1[0m  [["id", 298486374]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/customers" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Load (0.1ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.15ms)
+Completed 200 OK in 4ms (Views: 3.7ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------------
+CustomersController::index: test_0001_is a real working route
+-------------------------------------------------------------
+Started GET "/customers" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+No serializer found for resource: #<Customer id: 980190962, name: "MyString", registered_at: "MyString", address: "MyString", city: "MyString", state: "MyString", postal_code: "MyString", phone: "MyString", created_at: "2017-11-07 18:44:09", updated_at: "2017-11-07 18:44:09", account_credit: nil, movies_checked_out_count: 0>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Customer::ActiveRecord_Relation (0.72ms)
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------------
+CustomersController::index: test_0004_should return all customers
+-----------------------------------------------------------------
+Started GET "/customers" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+No serializer found for resource: #<Customer id: 980190962, name: "MyString", registered_at: "MyString", address: "MyString", city: "MyString", state: "MyString", postal_code: "MyString", phone: "MyString", created_at: "2017-11-07 18:44:09", updated_at: "2017-11-07 18:44:09", account_credit: nil, movies_checked_out_count: 0>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Customer::ActiveRecord_Relation (0.73ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "customers"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------------
+Movie::validations: test_0002_should not be valid without a title
+-----------------------------------------------------------------
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+Movie::validations: test_0001_should be valid
+---------------------------------------------
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+MoviesController::create: test_0001_should create a movie
+---------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies"[0m
+Started POST "/movies" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by MoviesController#create as HTML
+  Parameters: {"movie"=>{"title"=>"movie title", "release_data"=>"1979", "inventory"=>"10"}}
+Unpermitted parameter: :release_data
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "movies" ("title", "inventory", "created_at", "updated_at", "available_inventory") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "movie title"], ["inventory", 10], ["created_at", "2017-11-07 18:44:09.599396"], ["updated_at", "2017-11-07 18:44:09.599396"], ["available_inventory", 10]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 200 OK in 5ms (Views: 1.9ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------
+MoviesController::create: test_0002_should not change the database if the title is missing
+------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies"[0m
+Started POST "/movies" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by MoviesController#create as HTML
+  Parameters: {"movie"=>{"release_data"=>"1979", "inventory"=>"10"}}
+Unpermitted parameter: :release_data
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 400 Bad Request in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "movies"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+MoviesController::show: test_0001_can get a specific movie
+----------------------------------------------------------
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
+Started GET "/movies/898238949" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by MoviesController#show as HTML
+  Parameters: {"id"=>"898238949"}
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------
+MoviesController::show: test_0003_returns the right information
+---------------------------------------------------------------
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
+Started GET "/movies/898238949" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by MoviesController#show as HTML
+  Parameters: {"id"=>"898238949"}
+  [1m[36mMovie Load (0.1ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238949], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------
+MoviesController::show: test_0002_responds correctly when movie is not found
+----------------------------------------------------------------------------
+  [1m[36mMovie Load (0.1ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" ORDER BY "movies"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/movies/898238950" for 127.0.0.1 at 2017-11-07 10:44:09 -0800
+Processing by MoviesController#show as HTML
+  Parameters: {"id"=>"898238950"}
+  [1m[36mMovie Load (0.1ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 898238950], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.05ms)
+Completed 404 Not Found in 1ms (Views: 0.2ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m

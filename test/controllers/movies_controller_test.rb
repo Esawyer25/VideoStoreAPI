@@ -70,6 +70,7 @@ describe MoviesController do
       body["release_date"].must_equal "1975-06-19"
       body["inventory"].must_equal 6
       body["overview"].must_equal "SHARKS"
+      body["available_inventory"].must_equal 6
     end
   end
 

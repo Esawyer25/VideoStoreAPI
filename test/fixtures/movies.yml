@@ -18,9 +18,11 @@ Psych:
   overview: When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower
   release_date: 1960-06-16
   inventory: 8
+  available_inventory: 8
 
 Jaws:
   title: Jaws
   overview: SHARKS
   release_date: 1975-06-19
   inventory: 6
+  available_inventory: 6

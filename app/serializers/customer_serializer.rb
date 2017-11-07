@@ -1,3 +1,5 @@
 class CustomerSerializer < ActiveModel::Serializer
   attributes :id, :name, :registered_at, :postal_code, :phone, :movies_checked_out_count
+
+  puts "I am in the customer serializer"
 end
