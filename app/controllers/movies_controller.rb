@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
     movies = Movie.all
 
     render(
-    json: movies(only: [:id, :title, :release_date]), status: :ok
+    json: movies, status: :ok
     )
   end
 
@@ -12,9 +12,9 @@ class MoviesController < ApplicationController
     movie = Movie.find_by(id: params[:id])
 
     if movie
-      render(
-      json: movie(only: [:id, :title, :release_date, :overview, :inventory, :available_inventory]), status: :ok
-      )
+      render json: movie, serializer: Movies::ShowSerializer
+      #status: :ok
+
     else
       render(
       json: {nothing: true}, status: :not_found
