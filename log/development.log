@@ -78,3 +78,34 @@ Migrating to AddAvailableInventoryToMovies (20171106232634)
   [1m[35m (4.0ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2536986024271589520)[0m
   [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2536986024271589520)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddAvailableInventoryToMovies (20171106232634)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.1ms)[0m  [1m[35mALTER TABLE "movies" ADD "available_inventory" integer[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171106232634"]]
+  [1m[35m (11.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2536986024271589520)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/movies/" for 127.0.0.1 at 2017-11-06 15:57:38 -0800
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by MoviesController#create as */*
+  Parameters: {"movie"=>{"title"=>"Intersteller", "release_date"=>"2013-06-16"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "movies" ("title", "release_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "Intersteller"], ["release_date", "2013-06-16"], ["created_at", "2017-11-06 23:57:39.037141"], ["updated_at", "2017-11-06 23:57:39.037141"]]
+  [1m[35m (5.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 21ms (Views: 0.3ms | ActiveRecord: 9.3ms)
+
+
+Started POST "/movies/" for 127.0.0.1 at 2017-11-06 15:58:02 -0800
+Processing by MoviesController#create as */*
+  Parameters: {"movie"=>{"title"=>"Intersteller", "release_date"=>"2013-06-16"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "movies" ("title", "release_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "Intersteller"], ["release_date", "2013-06-16"], ["created_at", "2017-11-06 23:58:12.758794"], ["updated_at", "2017-11-06 23:58:12.758794"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 1.4ms)
+
+

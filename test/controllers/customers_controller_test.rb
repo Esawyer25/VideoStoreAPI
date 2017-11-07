@@ -38,12 +38,16 @@ describe CustomersController do
       end
     end
 
-      ##TODO: returns an empty array if no customers
+    it "returns an empty array if there are no customer" do
+      Customer.destroy_all
+      get customers_path
+
+      must_respond_with :success
+      body = JSON.parse(response.body)
+      body.must_be_kind_of Array
+      body.must_be :empty?
+    end
   end
-
-
-
-
 
 
 end
