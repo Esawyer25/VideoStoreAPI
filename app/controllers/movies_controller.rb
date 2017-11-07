@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
     movies = Movie.all
 
     render(
-    json: movies.as_json(only: [:id, :title, :release_date]), status: :ok
+    json: movies(only: [:id, :title, :release_date]), status: :ok
     )
   end
 
@@ -13,13 +13,12 @@ class MoviesController < ApplicationController
 
     if movie
       render(
-      json: movie.as_json(only: [:id, :title, :release_date, :overview, :inventory, :available_inventory]), status: :ok
+      json: movie(only: [:id, :title, :release_date, :overview, :inventory, :available_inventory]), status: :ok
       )
     else
-      # render(
-      # json: {errors: "title": {"Movie '#{{params[:title]}}' not found"}, status: :not_found
-      # )
-
+      render(
+      json: {nothing: true}, status: :not_found
+      )
     end
   end
 
@@ -29,11 +28,11 @@ class MoviesController < ApplicationController
     movie.available_inventory = movie.inventory
     if movie.save
       render(
-        json: {id: movie.id}, status: :ok
+      json: {id: movie.id}, status: :ok
       )
     else
       render(
-        json: {errors: movie.errors.messages}, status: :bad_request
+      json: {errors: movie.errors.messages}, status: :bad_request
       )
     end
   end
