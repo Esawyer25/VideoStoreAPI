@@ -80,7 +80,6 @@ describe RentalsController do
     end
 
     it "should change due_date to nil when given valid data" do
-
       patch rental_checkin_path, params: @valid_data
       rental = Rental.find_by(id: @rental.id)
       @rental.reload
@@ -94,12 +93,22 @@ describe RentalsController do
       body["id"].must_equal @rental.id
     end
 
-    it "should increase the customer's movie_checked_out_count by 1" do
+    it "should decrease the customer's movies_checked_out_count by 1" do
+      checked_out_count = @rental.customer.movies_checked_out_count
 
+      patch rental_checkin_path, params: @valid_data
+      @rental.reload
+
+      @rental.customer.movies_checked_out_count.must_equal checked_out_count - 1
     end
 
-    it "should decrease the movie's avilable_inventory by 1" do
+    it "should increase the movie's available_inventory by 1" do
+      current_inventory = @rental.movie.available_inventory
 
+      patch rental_checkin_path, params: @valid_data
+      @rental.reload
+
+      @rental.movie.available_inventory.must_equal current_inventory + 1
     end
 
     it "should " do

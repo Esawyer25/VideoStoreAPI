@@ -32,10 +32,12 @@ class RentalsController < ApplicationController
 
     if rental
       rental.due_date = nil
-      rental.customer.movies_checked_out_count -= 1
-      rental.movie.available_inventory += 1
-
       rental.save
+
+      rental.movie.increase_inventory
+      rental.movie.save
+      rental.customer.decrease_movies_checked_out_count
+      rental.customer.save
 
       render(
       json: {id: rental.id}, status: :ok

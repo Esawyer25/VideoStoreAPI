@@ -7041,3 +7041,270 @@ Movie::decrease_inventory: test_0002_should return nil if there is not available
 ------------------------------------------------------------------------------------------
   [1m[36mMovie Load (0.3ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 287487352], ["LIMIT", 1]]
   [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "customers" DISABLE TRIGGER ALL;ALTER TABLE "movies" DISABLE TRIGGER ALL;ALTER TABLE "rentals" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "customers"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('eva', 'eee', '23 Eva', 'Seattle', 'WA', '12345', '6173482743', 0, '2017-11-08 21:52:07.676172', '2017-11-08 21:52:07.676172', 848125802)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('anders', 'aaa', '14 anders', 'Seattle', 'WA', '12593', '7189274828', 0, '2017-11-08 21:52:07.676172', '2017-11-08 21:52:07.676172', 976610846)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "movies"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Psych', 'When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower', '1960-06-16', 8, 8, '2017-11-08 21:52:07.705796', '2017-11-08 21:52:07.705796', 287487352)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Jaws', 'SHARKS', '1975-06-19', 6, 6, '2017-11-08 21:52:07.705796', '2017-11-08 21:52:07.705796', 898238949)[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "rentals"[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-12-12', '2017-11-08 21:52:07.713362', '2017-11-08 21:52:07.713362', 980190962, 287487352, 976610846)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-05-20', '2017-11-08 21:52:07.713362', '2017-11-08 21:52:07.713362', 298486374, 898238949, 848125802)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "customers" ENABLE TRIGGER ALL;ALTER TABLE "movies" ENABLE TRIGGER ALL;ALTER TABLE "rentals" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------
+RentalsController::update: test_0004_should increase the customer's movie_checked_out_count by 1
+------------------------------------------------------------------------------------------------
+  [1m[36mRental Load (0.2ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "customers" DISABLE TRIGGER ALL;ALTER TABLE "movies" DISABLE TRIGGER ALL;ALTER TABLE "rentals" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "customers"[0m
+  [1m[36mFixture Insert (0.9ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('eva', 'eee', '23 Eva', 'Seattle', 'WA', '12345', '6173482743', 0, '2017-11-08 21:52:23.449352', '2017-11-08 21:52:23.449352', 848125802)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('anders', 'aaa', '14 anders', 'Seattle', 'WA', '12593', '7189274828', 0, '2017-11-08 21:52:23.449352', '2017-11-08 21:52:23.449352', 976610846)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "movies"[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Psych', 'When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower', '1960-06-16', 8, 8, '2017-11-08 21:52:23.466171', '2017-11-08 21:52:23.466171', 287487352)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Jaws', 'SHARKS', '1975-06-19', 6, 6, '2017-11-08 21:52:23.466171', '2017-11-08 21:52:23.466171', 898238949)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "rentals"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-12-12', '2017-11-08 21:52:23.475865', '2017-11-08 21:52:23.475865', 980190962, 287487352, 976610846)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-05-20', '2017-11-08 21:52:23.475865', '2017-11-08 21:52:23.475865', 298486374, 898238949, 848125802)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "customers" ENABLE TRIGGER ALL;ALTER TABLE "movies" ENABLE TRIGGER ALL;ALTER TABLE "rentals" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------
+RentalsController::update: test_0004_should increase the customer's movie_checked_out_count by 1
+------------------------------------------------------------------------------------------------
+  [1m[36mRental Load (0.2ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 287487352], ["LIMIT", 1]]
+Started PATCH "/rentals/check-in" for 127.0.0.1 at 2017-11-08 13:52:23 -0800
+Processing by RentalsController#update as HTML
+  Parameters: {"customer_id"=>"976610846", "movie_id"=>"287487352", "due_date"=>"2017-12-12"}
+  [1m[36mRental Load (0.7ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."customer_id" = $1 AND "rentals"."movie_id" = $2 AND "rentals"."due_date" = $3 ORDER BY "rentals"."id" ASC LIMIT $4[0m  [["customer_id", 976610846], ["movie_id", 287487352], ["due_date", "2017-12-12"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 287487352], ["LIMIT", 1]]
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 976610846], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "rentals" SET "due_date" = $1, "updated_at" = $2 WHERE "rentals"."id" = $3[0m  [["due_date", nil], ["updated_at", "2017-11-08 21:52:23.649134"], ["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "movies" SET "available_inventory" = $1, "updated_at" = $2 WHERE "movies"."id" = $3[0m  [["available_inventory", 9], ["updated_at", "2017-11-08 21:52:23.652038"], ["id", 287487352]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "customers" SET "movies_checked_out_count" = $1, "updated_at" = $2 WHERE "customers"."id" = $3[0m  [["movies_checked_out_count", -1], ["updated_at", "2017-11-08 21:52:23.653974"], ["id", 976610846]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 200 OK in 21ms (Views: 0.3ms | ActiveRecord: 2.6ms)
+  [1m[36mRental Load (0.2ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 287487352], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "customers" DISABLE TRIGGER ALL;ALTER TABLE "movies" DISABLE TRIGGER ALL;ALTER TABLE "rentals" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "customers"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('eva', 'eee', '23 Eva', 'Seattle', 'WA', '12345', '6173482743', 0, '2017-11-08 21:52:34.944952', '2017-11-08 21:52:34.944952', 848125802)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('anders', 'aaa', '14 anders', 'Seattle', 'WA', '12593', '7189274828', 0, '2017-11-08 21:52:34.944952', '2017-11-08 21:52:34.944952', 976610846)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "movies"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Psych', 'When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower', '1960-06-16', 8, 8, '2017-11-08 21:52:34.961420', '2017-11-08 21:52:34.961420', 287487352)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Jaws', 'SHARKS', '1975-06-19', 6, 6, '2017-11-08 21:52:34.961420', '2017-11-08 21:52:34.961420', 898238949)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "rentals"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-12-12', '2017-11-08 21:52:34.971996', '2017-11-08 21:52:34.971996', 980190962, 287487352, 976610846)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-05-20', '2017-11-08 21:52:34.971996', '2017-11-08 21:52:34.971996', 298486374, 898238949, 848125802)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "customers" ENABLE TRIGGER ALL;ALTER TABLE "movies" ENABLE TRIGGER ALL;ALTER TABLE "rentals" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------
+RentalsController::update: test_0004_should increase the customer's movie_checked_out_count by 1
+------------------------------------------------------------------------------------------------
+  [1m[36mRental Load (0.2ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mMovie Load (0.3ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 287487352], ["LIMIT", 1]]
+Started PATCH "/rentals/check-in" for 127.0.0.1 at 2017-11-08 13:52:35 -0800
+Processing by RentalsController#update as HTML
+  Parameters: {"customer_id"=>"976610846", "movie_id"=>"287487352", "due_date"=>"2017-12-12"}
+  [1m[36mRental Load (0.6ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."customer_id" = $1 AND "rentals"."movie_id" = $2 AND "rentals"."due_date" = $3 ORDER BY "rentals"."id" ASC LIMIT $4[0m  [["customer_id", 976610846], ["movie_id", 287487352], ["due_date", "2017-12-12"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 287487352], ["LIMIT", 1]]
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 976610846], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "rentals" SET "due_date" = $1, "updated_at" = $2 WHERE "rentals"."id" = $3[0m  [["due_date", nil], ["updated_at", "2017-11-08 21:52:35.106803"], ["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "movies" SET "available_inventory" = $1, "updated_at" = $2 WHERE "movies"."id" = $3[0m  [["available_inventory", 9], ["updated_at", "2017-11-08 21:52:35.109636"], ["id", 287487352]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "customers" SET "movies_checked_out_count" = $1, "updated_at" = $2 WHERE "customers"."id" = $3[0m  [["movies_checked_out_count", -1], ["updated_at", "2017-11-08 21:52:35.112121"], ["id", 976610846]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 200 OK in 22ms (Views: 0.2ms | ActiveRecord: 2.9ms)
+  [1m[36mRental Load (0.2ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 287487352], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "customers" DISABLE TRIGGER ALL;ALTER TABLE "movies" DISABLE TRIGGER ALL;ALTER TABLE "rentals" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "customers"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('eva', 'eee', '23 Eva', 'Seattle', 'WA', '12345', '6173482743', 0, '2017-11-08 21:54:41.557638', '2017-11-08 21:54:41.557638', 848125802)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('anders', 'aaa', '14 anders', 'Seattle', 'WA', '12593', '7189274828', 0, '2017-11-08 21:54:41.557638', '2017-11-08 21:54:41.557638', 976610846)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "movies"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Psych', 'When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower', '1960-06-16', 8, 8, '2017-11-08 21:54:41.566276', '2017-11-08 21:54:41.566276', 287487352)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Jaws', 'SHARKS', '1975-06-19', 6, 6, '2017-11-08 21:54:41.566276', '2017-11-08 21:54:41.566276', 898238949)[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "rentals"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-12-12', '2017-11-08 21:54:41.572065', '2017-11-08 21:54:41.572065', 980190962, 287487352, 976610846)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-05-20', '2017-11-08 21:54:41.572065', '2017-11-08 21:54:41.572065', 298486374, 898238949, 848125802)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "customers" ENABLE TRIGGER ALL;ALTER TABLE "movies" ENABLE TRIGGER ALL;ALTER TABLE "rentals" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------
+RentalsController::update: test_0004_should decrease the customer's movie_checked_out_count by 1
+------------------------------------------------------------------------------------------------
+  [1m[36mRental Load (0.2ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 976610846], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "customers" DISABLE TRIGGER ALL;ALTER TABLE "movies" DISABLE TRIGGER ALL;ALTER TABLE "rentals" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "customers"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('eva', 'eee', '23 Eva', 'Seattle', 'WA', '12345', '6173482743', 0, '2017-11-08 21:55:57.031836', '2017-11-08 21:55:57.031836', 848125802)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('anders', 'aaa', '14 anders', 'Seattle', 'WA', '12593', '7189274828', 0, '2017-11-08 21:55:57.031836', '2017-11-08 21:55:57.031836', 976610846)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "movies"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Psych', 'When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower', '1960-06-16', 8, 8, '2017-11-08 21:55:57.054774', '2017-11-08 21:55:57.054774', 287487352)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Jaws', 'SHARKS', '1975-06-19', 6, 6, '2017-11-08 21:55:57.054774', '2017-11-08 21:55:57.054774', 898238949)[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "rentals"[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-12-12', '2017-11-08 21:55:57.065206', '2017-11-08 21:55:57.065206', 980190962, 287487352, 976610846)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-05-20', '2017-11-08 21:55:57.065206', '2017-11-08 21:55:57.065206', 298486374, 898238949, 848125802)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "customers" ENABLE TRIGGER ALL;ALTER TABLE "movies" ENABLE TRIGGER ALL;ALTER TABLE "rentals" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------
+RentalsController::update: test_0004_should decrease the customer's movie_checked_out_count by 1
+------------------------------------------------------------------------------------------------
+  [1m[36mRental Load (0.2ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 976610846], ["LIMIT", 1]]
+Started PATCH "/rentals/check-in" for 127.0.0.1 at 2017-11-08 13:55:57 -0800
+Processing by RentalsController#update as HTML
+  Parameters: {"customer_id"=>"976610846", "movie_id"=>"287487352", "due_date"=>"2017-12-12"}
+  [1m[36mRental Load (0.6ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."customer_id" = $1 AND "rentals"."movie_id" = $2 AND "rentals"."due_date" = $3 ORDER BY "rentals"."id" ASC LIMIT $4[0m  [["customer_id", 976610846], ["movie_id", 287487352], ["due_date", "2017-12-12"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 287487352], ["LIMIT", 1]]
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 976610846], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "rentals" SET "due_date" = $1, "updated_at" = $2 WHERE "rentals"."id" = $3[0m  [["due_date", nil], ["updated_at", "2017-11-08 21:55:57.248498"], ["id", 980190962]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "movies" SET "available_inventory" = $1, "updated_at" = $2 WHERE "movies"."id" = $3[0m  [["available_inventory", 9], ["updated_at", "2017-11-08 21:55:57.251433"], ["id", 287487352]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "customers" SET "movies_checked_out_count" = $1, "updated_at" = $2 WHERE "customers"."id" = $3[0m  [["movies_checked_out_count", -1], ["updated_at", "2017-11-08 21:55:57.253704"], ["id", 976610846]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 200 OK in 19ms (Views: 0.2ms | ActiveRecord: 2.7ms)
+  [1m[36mRental Load (0.2ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mCustomer Load (0.1ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 976610846], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "customers" DISABLE TRIGGER ALL;ALTER TABLE "movies" DISABLE TRIGGER ALL;ALTER TABLE "rentals" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "customers"[0m
+  [1m[36mFixture Insert (5.6ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('eva', 'eee', '23 Eva', 'Seattle', 'WA', '12345', '6173482743', 0, '2017-11-08 21:57:23.386648', '2017-11-08 21:57:23.386648', 848125802)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('anders', 'aaa', '14 anders', 'Seattle', 'WA', '12593', '7189274828', 0, '2017-11-08 21:57:23.386648', '2017-11-08 21:57:23.386648', 976610846)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "movies"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Psych', 'When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower', '1960-06-16', 8, 8, '2017-11-08 21:57:23.410336', '2017-11-08 21:57:23.410336', 287487352)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Jaws', 'SHARKS', '1975-06-19', 6, 6, '2017-11-08 21:57:23.410336', '2017-11-08 21:57:23.410336', 898238949)[0m
+  [1m[36mFixture Delete (0.7ms)[0m  [1m[31mDELETE FROM "rentals"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-12-12', '2017-11-08 21:57:23.418441', '2017-11-08 21:57:23.418441', 980190962, 287487352, 976610846)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-05-20', '2017-11-08 21:57:23.418441', '2017-11-08 21:57:23.418441', 298486374, 898238949, 848125802)[0m
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "customers" ENABLE TRIGGER ALL;ALTER TABLE "movies" ENABLE TRIGGER ALL;ALTER TABLE "rentals" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------
+RentalsController::update: test_0004_should decrease the customer's movie_checked_out_count by 1
+------------------------------------------------------------------------------------------------
+  [1m[36mRental Load (0.2ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 976610846], ["LIMIT", 1]]
+Started PATCH "/rentals/check-in" for 127.0.0.1 at 2017-11-08 13:57:23 -0800
+Processing by RentalsController#update as HTML
+  Parameters: {"customer_id"=>"976610846", "movie_id"=>"287487352", "due_date"=>"2017-12-12"}
+  [1m[36mRental Load (0.8ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."customer_id" = $1 AND "rentals"."movie_id" = $2 AND "rentals"."due_date" = $3 ORDER BY "rentals"."id" ASC LIMIT $4[0m  [["customer_id", 976610846], ["movie_id", 287487352], ["due_date", "2017-12-12"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 287487352], ["LIMIT", 1]]
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 976610846], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "rentals" SET "due_date" = $1, "updated_at" = $2 WHERE "rentals"."id" = $3[0m  [["due_date", nil], ["updated_at", "2017-11-08 21:57:23.578176"], ["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "movies" SET "available_inventory" = $1, "updated_at" = $2 WHERE "movies"."id" = $3[0m  [["available_inventory", 9], ["updated_at", "2017-11-08 21:57:23.580594"], ["id", 287487352]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "customers" SET "movies_checked_out_count" = $1, "updated_at" = $2 WHERE "customers"."id" = $3[0m  [["movies_checked_out_count", -1], ["updated_at", "2017-11-08 21:57:23.582584"], ["id", 976610846]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 2.5ms)
+  [1m[36mRental Load (0.2ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mCustomer Load (0.1ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 976610846], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "customers" DISABLE TRIGGER ALL;ALTER TABLE "movies" DISABLE TRIGGER ALL;ALTER TABLE "rentals" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (1.0ms)[0m  [1m[31mDELETE FROM "customers"[0m
+  [1m[36mFixture Insert (0.8ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('eva', 'eee', '23 Eva', 'Seattle', 'WA', '12345', '6173482743', 0, '2017-11-08 21:58:24.503332', '2017-11-08 21:58:24.503332', 848125802)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('anders', 'aaa', '14 anders', 'Seattle', 'WA', '12593', '7189274828', 0, '2017-11-08 21:58:24.503332', '2017-11-08 21:58:24.503332', 976610846)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "movies"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Psych', 'When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower', '1960-06-16', 8, 8, '2017-11-08 21:58:24.525422', '2017-11-08 21:58:24.525422', 287487352)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Jaws', 'SHARKS', '1975-06-19', 6, 6, '2017-11-08 21:58:24.525422', '2017-11-08 21:58:24.525422', 898238949)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "rentals"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-12-12', '2017-11-08 21:58:24.531577', '2017-11-08 21:58:24.531577', 980190962, 287487352, 976610846)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-05-20', '2017-11-08 21:58:24.531577', '2017-11-08 21:58:24.531577', 298486374, 898238949, 848125802)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "customers" ENABLE TRIGGER ALL;ALTER TABLE "movies" ENABLE TRIGGER ALL;ALTER TABLE "rentals" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------------------------------------------------
+RentalsController::update: test_0004_should decrease the customer's movies_checked_out_count by 1
+-------------------------------------------------------------------------------------------------
+  [1m[36mRental Load (0.2ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 976610846], ["LIMIT", 1]]
+Started PATCH "/rentals/check-in" for 127.0.0.1 at 2017-11-08 13:58:24 -0800
+Processing by RentalsController#update as HTML
+  Parameters: {"customer_id"=>"976610846", "movie_id"=>"287487352", "due_date"=>"2017-12-12"}
+  [1m[36mRental Load (0.5ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."customer_id" = $1 AND "rentals"."movie_id" = $2 AND "rentals"."due_date" = $3 ORDER BY "rentals"."id" ASC LIMIT $4[0m  [["customer_id", 976610846], ["movie_id", 287487352], ["due_date", "2017-12-12"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 287487352], ["LIMIT", 1]]
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 976610846], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "rentals" SET "due_date" = $1, "updated_at" = $2 WHERE "rentals"."id" = $3[0m  [["due_date", nil], ["updated_at", "2017-11-08 21:58:24.669984"], ["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "movies" SET "available_inventory" = $1, "updated_at" = $2 WHERE "movies"."id" = $3[0m  [["available_inventory", 9], ["updated_at", "2017-11-08 21:58:24.672458"], ["id", 287487352]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "customers" SET "movies_checked_out_count" = $1, "updated_at" = $2 WHERE "customers"."id" = $3[0m  [["movies_checked_out_count", -1], ["updated_at", "2017-11-08 21:58:24.674487"], ["id", 976610846]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 2.3ms)
+  [1m[36mRental Load (0.3ms)[0m  [1m[34mSELECT  "rentals".* FROM "rentals" WHERE "rentals"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 976610846], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
