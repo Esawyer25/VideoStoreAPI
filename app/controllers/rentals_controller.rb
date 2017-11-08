@@ -3,15 +3,20 @@ class RentalsController < ApplicationController
   def create
     rental = Rental.new(rental_params)
 
-    # debugger
-
     if rental.save
-      rental.movie.decrease_inventory
-      rental.customer.increase_movies_checked_out_count
+      if rental.movie.decrease_inventory
+        rental.movie.save
+        rental.customer.increase_movies_checked_out_count
+        rental.customer.save
 
-      render(
-      json: {id: rental.id}, status: :ok
-      )
+        render(
+        json: {id: rental.id}, status: :ok
+        )
+      else
+        render(
+        json: {not_available: true}, status: :bad_request
+        )
+      end
     else
       render(
       json: {errors: rental.errors.messages}, status: :bad_request

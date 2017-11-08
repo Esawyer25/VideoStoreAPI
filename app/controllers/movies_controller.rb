@@ -26,7 +26,6 @@ class MoviesController < ApplicationController
   def create
     movie = Movie.new(movie_params)
     movie.overview = params[:overview]
-    debugger
     movie.available_inventory = movie.inventory
     if movie.save
       render(

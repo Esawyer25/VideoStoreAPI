@@ -31,7 +31,7 @@ describe RentalsController do
       customer.movies_checked_out_count.must_equal count + 1
     end
 
-    it "should decrease the movie avilable_inventory by 1" do
+    it "should decrease the movie available_inventory by 1" do
       movie_id = rental_data[:movie_id]
       movie = Movie.find_by(id: movie_id)
 
@@ -42,6 +42,10 @@ describe RentalsController do
       movie.reload
 
       movie.available_inventory.must_equal count - 1
+    end
+
+    it "should return bad_request if not enough available_inventory" do
+
     end
 
     it "should not change the database if given invalid data" do
