@@ -37,10 +37,10 @@ describe RentalsController do
 
   describe "update" do
     before do
-      rental = rentals(:one)
+      @rental = rentals(:one)
       @valid_data = {
-        customer_id: rental.customer_id,
-        movie_id: rental.movie_id
+        customer_id: @rental.customer_id,
+        movie_id: @rental.movie_id
       }
     end
 
@@ -53,7 +53,7 @@ describe RentalsController do
     it "should change due_date to nil when given valid data" do
       patch rental_checkin_path, params: {rental: @valid_data}
 
-
+      @rental.due_date.must_equal nil
     end
   end
 end

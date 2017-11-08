@@ -6,6 +6,12 @@ class RentalsController < ApplicationController
       render(
       json: {id: rental.id}, status: :ok
       )
+
+      customer = Customer.find_by(id: rental.customer_id)
+      customer.movies_checked_out_count += 1
+
+      movie = Movie.find_by(id: rental.movie_id)
+      movie.available_inventory -= 1
     else
       render(
       json: {errors: rental.errors.messages}, status: :bad_request
@@ -24,6 +30,12 @@ class RentalsController < ApplicationController
       render(
       json: {id: rental.id}, status: :ok
       )
+
+      customer = Customer.find_by(id: rental.customer_id)
+      customer.movies_checked_out_count -= 1
+
+      movie = Movie.find_by(id: rental.movie_id)
+      movie.available_inventory += 1
     else
       render(
       json: {errors: rental.errors.messages}, status: :bad_request
