@@ -5,6 +5,5 @@ class Customer < ApplicationRecord
   def increase_movies_checked_out_count
     #handle overdue if you get there
     self.movies_checked_out_count += 1
-    
   end
 end

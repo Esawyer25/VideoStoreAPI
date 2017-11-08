@@ -6993,3 +6993,51 @@ Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 1.4ms)
 RentalsController::create: test_0004_should return bad_request if not enough available_inventory
 ------------------------------------------------------------------------------------------------
   [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "customers" DISABLE TRIGGER ALL;ALTER TABLE "movies" DISABLE TRIGGER ALL;ALTER TABLE "rentals" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (5.6ms)[0m  [1m[31mDELETE FROM "customers"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('eva', 'eee', '23 Eva', 'Seattle', 'WA', '12345', '6173482743', 0, '2017-11-08 20:33:32.182163', '2017-11-08 20:33:32.182163', 848125802)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('anders', 'aaa', '14 anders', 'Seattle', 'WA', '12593', '7189274828', 0, '2017-11-08 20:33:32.182163', '2017-11-08 20:33:32.182163', 976610846)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "movies"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Psych', 'When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower', '1960-06-16', 8, 8, '2017-11-08 20:33:32.197058', '2017-11-08 20:33:32.197058', 287487352)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Jaws', 'SHARKS', '1975-06-19', 6, 6, '2017-11-08 20:33:32.197058', '2017-11-08 20:33:32.197058', 898238949)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "rentals"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-12-12', '2017-11-08 20:33:32.210102', '2017-11-08 20:33:32.210102', 980190962, 287487352, 976610846)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-05-20', '2017-11-08 20:33:32.210102', '2017-11-08 20:33:32.210102', 298486374, 898238949, 848125802)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "customers" ENABLE TRIGGER ALL;ALTER TABLE "movies" ENABLE TRIGGER ALL;ALTER TABLE "rentals" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------------------------
+Movie::decrease_inventory: test_0001_should return an Integer if there is available inventory
+---------------------------------------------------------------------------------------------
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 287487352], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "customers" DISABLE TRIGGER ALL;ALTER TABLE "movies" DISABLE TRIGGER ALL;ALTER TABLE "rentals" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "customers"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('eva', 'eee', '23 Eva', 'Seattle', 'WA', '12345', '6173482743', 0, '2017-11-08 20:34:15.662893', '2017-11-08 20:34:15.662893', 848125802)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "customers" ("name", "registered_at", "address", "city", "state", "postal_code", "phone", "movies_checked_out_count", "created_at", "updated_at", "id") VALUES ('anders', 'aaa', '14 anders', 'Seattle', 'WA', '12593', '7189274828', 0, '2017-11-08 20:34:15.662893', '2017-11-08 20:34:15.662893', 976610846)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "movies"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Psych', 'When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower', '1960-06-16', 8, 8, '2017-11-08 20:34:15.671271', '2017-11-08 20:34:15.671271', 287487352)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "movies" ("title", "overview", "release_date", "inventory", "available_inventory", "created_at", "updated_at", "id") VALUES ('Jaws', 'SHARKS', '1975-06-19', 6, 6, '2017-11-08 20:34:15.671271', '2017-11-08 20:34:15.671271', 898238949)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "rentals"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-12-12', '2017-11-08 20:34:15.678734', '2017-11-08 20:34:15.678734', 980190962, 287487352, 976610846)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "rentals" ("due_date", "created_at", "updated_at", "id", "movie_id", "customer_id") VALUES ('2017-05-20', '2017-11-08 20:34:15.678734', '2017-11-08 20:34:15.678734', 298486374, 898238949, 848125802)[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "customers" ENABLE TRIGGER ALL;ALTER TABLE "movies" ENABLE TRIGGER ALL;ALTER TABLE "rentals" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------
+Movie::decrease_inventory: test_0002_should return nil if there is not available inventory
+------------------------------------------------------------------------------------------
+  [1m[36mMovie Load (0.3ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 287487352], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m

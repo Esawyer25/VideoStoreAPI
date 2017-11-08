@@ -5,10 +5,10 @@ class Movie < ApplicationRecord
   def decrease_inventory
     if available_inventory?
       self.available_inventory -= 1
-      #self.save
     end
-
   end
+
+  private
 
   def available_inventory?
     unless self.available_inventory < 1
