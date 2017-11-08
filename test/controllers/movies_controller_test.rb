@@ -103,8 +103,5 @@ describe MoviesController do
           body.must_equal "errors" => {"title" => ["can't be blank"]}
         end
 
-
-
-
       end
     end

@@ -5,4 +5,8 @@ class Rental < ApplicationRecord
   def checkout_date
     return self.created_at.strftime("%d %b. %Y")
   end
+
+  # def checkin
+  #
+  #   false/true
 end

@@ -2,16 +2,16 @@ class RentalsController < ApplicationController
 
   def create
     rental = Rental.new(rental_params)
+
+    # debugger
+
     if rental.save
+      rental.movie.decrease_inventory
+      rental.customer.increase_movies_checked_out_count
+
       render(
       json: {id: rental.id}, status: :ok
       )
-
-      customer = Customer.find_by(id: rental.customer_id)
-      customer.movies_checked_out_count += 1
-
-      movie = Movie.find_by(id: rental.movie_id)
-      movie.available_inventory -= 1
     else
       render(
       json: {errors: rental.errors.messages}, status: :bad_request
@@ -27,15 +27,15 @@ class RentalsController < ApplicationController
 
     if rental
       rental.due_date = nil
+      rental.customer.movies_checked_out_count -= 1
+      rental.movie.available_inventory += 1
+
+      rental.save
+
       render(
       json: {id: rental.id}, status: :ok
       )
 
-      customer = Customer.find_by(id: rental.customer_id)
-      customer.movies_checked_out_count -= 1
-
-      movie = Movie.find_by(id: rental.movie_id)
-      movie.available_inventory += 1
     else
       render(
       json: {errors: rental.errors.messages}, status: :bad_request

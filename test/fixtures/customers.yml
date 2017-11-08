@@ -8,6 +8,7 @@ eva:
   state: WA
   postal_code: 12345
   phone: 6173482743
+  movies_checked_out_count: 0
 
 anders:
   name: anders
@@ -17,3 +18,4 @@ anders:
   state: WA
   postal_code: 12593
   phone: 7189274828
+  movies_checked_out_count: 0
