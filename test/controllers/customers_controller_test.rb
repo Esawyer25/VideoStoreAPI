@@ -48,6 +48,4 @@ describe CustomersController do
       body.must_be :empty?
     end
   end
-
-
 end

@@ -110,9 +110,5 @@ describe RentalsController do
 
       @rental.movie.available_inventory.must_equal current_inventory + 1
     end
-
-    it "should " do
-
-    end
   end
 end
