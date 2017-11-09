@@ -17,8 +17,17 @@ describe "validations" do
   end
 end
 
+describe "increase_inventory" do
+  it "should return an Integer and increase inventory" do
+    movie = movies(:Psych)
+    current_inventory = movie.available_inventory
+
+    movie.increase_inventory.must_equal current_inventory + 1
+  end
+end
+
 describe "decrease_inventory" do
-  it "should return an Integer if there is available inventory" do
+  it "should decrease inventory and return an Integer if there is available inventory" do
     movie = movies(:Psych)
     current_inventory = movie.available_inventory
 
